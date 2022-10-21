@@ -1,0 +1,23 @@
+Fresh workstation
+  Update/upgrade everything, including TBB
+  Forward I2P ports to GW
+    sudoedit /etc/anon-ws-disable-stacked-tor.d/50_user.conf
+    Paste the following (modify as necessary):
+    I2P_PORTS="2827 3456 4444 4445 6668 7622 7650 7651 7654 7656 7658 7659 7660 7661 7662 8998 8118"
+
+    for i2p_port in $I2P_PORTS ; do
+      $pre_command socat TCP-LISTEN:$i2p_port,fork,bind=127.0.0.1 TCP:$GATEWAY_IP:$i2p_port &
+    done
+  
+  
+  
+  Install "Proxy SwitchyOmega" into TBB
+  Reconfigure TBB
+    about:config
+    extensions.torbutton.use_nontor_proxy:true
+    keyword.enabled:false (allows 'reg.i2p' style addresses, preventing auto-search)
+    browser.search.suggest.enabled:false
+  Import "Proxy SwitchyOmega" Config
+  Test .onion (DuckDuckGo Onion - https://duckduckgogg42xjoc72x3sjasowoarfbgcmvfimaftt6twagswzczad.onion)
+  Test .i2p   (I2P Registry Eepsite - http://reg.i2p)
+  
