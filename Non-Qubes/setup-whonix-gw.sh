@@ -1,10 +1,17 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
+set -o errexit
+set -o nounset
+set -o pipefail
+if [[ -n "${TRACE-}" ]]; then
+  set -o xtrace
+fi
 
+cd "$(dirname "$0")"
 
-
+main() {
 apt-get update
-apt-get -y install apt-transport-https lsb-release curl
+apt-get -y install --no-install-recommends apt-transport-https lsb-release curl
 
 echo "deb [signed-by=/usr/share/keyrings/i2p-archive-keyring.gpg] tor+https://deb.i2p2.de/ $(lsb_release -sc) main" | sudo tee /etc/apt/sources.list.d/i2p.list
 
@@ -12,7 +19,7 @@ curl -o ~/i2p-archive-keyring.gpg https://geti2p.net/_static/i2p-archive-keyring
 cp ~/i2p-archive-keyring.gpg /usr/share/keyrings
 
 apt-get update
-apt-get -y install i2p i2p-keyring firefox-esr
+apt-get -y install --no-install-recommends i2p i2p-keyring firefox-esr
 systemctl stop i2p
 sleep 10
 
@@ -38,23 +45,25 @@ router.reseedSSLRequired=false
 time.disabled=true
 EOF
 
-systemctl start i2p
-sleep 60
-systemctl stop i2p
-sleep 10
 
 # Update listening to $GATEWAYIP
-SAVEIFS=$IFS
-IFS=$(echo -en "\n\b")
 GATEWAYIP=$(ip addr | grep 'eth1' | grep -v 'BROADCAST' | cut -d / -f 1 | awk '{print $2}')
 echo "Gateway IP is: $GATEWAYIP"
-for file in $(ls /var/lib/i2p/i2p-config/i2ptunnel.config.d/)
-do
-	sudo sed -i "s/\(.*interface=\).*/\1$GATEWAYIP/g;s/\(.*targetHost=\).*/\1$GATEWAYIP/g" "${file}"
-done
-IFS=$SAVEIFS
+# Fixes the gateway address before i2p splits the old config file to the tunnel configs in .d
+sed -i "s/\(.*interface=\).*/\1$GATEWAYIP/g;s/\(.*targetHost=\).*/\1$GATEWAYIP/g" /var/lib/i2p/i2p-config/i2ptunnel.config
+
+echo "http://inr.i2p/export/alive-hosts.txt" >> /var/lib/i2p/i2p-config/addressbook/subscriptions.txt
+echo "http://stats.i2p/cgi-bin/newhosts.txt" >> /var/lib/i2p/i2p-config/addressbook/subscriptions.txt
+echo "http://rus.i2p/hosts.txt" >> /var/lib/i2p/i2p-config/addressbook/subscriptions.txt
+echo "http://diva.i2p/hosts.txt" >> /var/lib/i2p/i2p-config/addressbook/subscriptions.txt
+echo "http://reg.i2p/export/hosts-all.txt" >> /var/lib/i2p/i2p-config/addressbook/subscriptions.txt
+
 /usr/bin/whonix_firewall
 systemctl start i2p
 
 echo "Don't forget to run 'dpkg-reconfigure i2p' to adjust I2P memory and restart I2P!"
 
+
+}
+
+main "$@"

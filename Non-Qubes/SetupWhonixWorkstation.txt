@@ -1,14 +1,19 @@
 Fresh workstation
   Update/upgrade everything, including TBB
   Install "Proxy SwitchyOmega" into TBB, allow in Private Mode
+    Set startup profile to "auto switch"
+    Add "I2P" profile
+      http: 10.152.152.10 4444
+      https: 10.152.152.10 4445
+    Add "Tor" profile
+      socks5: 10.152.152.10 9050
+    Modify "auto switch" to force *.i2p to "I2P" profile
+    Modify "auto switch" to force *.onion to "Tor" profile
+    Modify Default to "Tor"
   Reconfigure TBB
     about:config
-    extensions.torbutton.use_nontor_proxy:true
-    keyword.enabled:false (allows 'reg.i2p' style addresses, preventing auto-search)
-    browser.search.suggest.enabled:false
-    https_only_mode:false
-    https_only_mode_pbm:false
-  Import "Proxy SwitchyOmega" Config (or setup manually)
+    +keyword.enabled:false
+    +browser.urlbar.autofill:false
   Test .onion (DuckDuckGo Onion - https://duckduckgogg42xjoc72x3sjasowoarfbgcmvfimaftt6twagswzczad.onion)
   Test .i2p   (I2P Registry Eepsite - http://reg.i2p)
   
