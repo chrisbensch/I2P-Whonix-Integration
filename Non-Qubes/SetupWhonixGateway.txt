@@ -1,4 +1,0 @@
-Fresh Gateway
-  Update/Upgrade everything
-  Install I2P/Firefox (or other) to configure I2P Router on Gateway, remove when finished.
-  Modify Firewall Settings
