@@ -1,0 +1,4 @@
+Fresh Whonix Workstation
+  Update/upgrade everything
+  Run "setup-whonix-gw.sh"
+  
