@@ -1,4 +1,6 @@
-Fresh Whonix Workstation
+Fresh Whonix Gateway
   Update/upgrade everything
-  Run "setup-whonix-gw.sh"
+  Run "setup-whonix-gw-i2p.sh" or "setup-whonix-gw-i2pd.sh" depending on which flavor you want.
+  Let the GW sit for a few minutes while addressbooks are downloaded and tunnels are built.
+  
   
