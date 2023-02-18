@@ -56,11 +56,11 @@ EOF
 GATEWAYIP=$(ip addr | grep 'eth1' | grep -v 'BROADCAST' | cut -d / -f 1 | awk '{print $2}')
 echo "Gateway IP is: $GATEWAYIP"
 
-sed -i "s/\(.*interface=\).*/\1$GATEWAYIP/g;s/\(.*targetHost=\).*/\1$GATEWAYIP/g" /var/lib/i2p/i2p-config/i2ptunnel.config
+sed -i "s/\(.*interface=\).*/\1$GATEWAYIP/g;s/\(.*targetHost=\).*/\1$GATEWAYIP/g" /var/lib/i2p/i2p-config/i2ptunnel.config.d/*
 
 # Remove outproxies from both HTTP and HTTPS tunnels
-sed -i '/^.*tunnel\.0\.\(proxyList\|option\.i2ptunnel\.httpclient\.SSLOutproxies\)/d' "/var/lib/i2p/i2p-config/i2ptunnel.config"
-sed -i '/^.*tunnel\.5\.\(proxyList\|option\.i2ptunnel\.httpclient\.SSLOutproxies\)/d' "/var/lib/i2p/i2p-config/i2ptunnel.config"
+sed -i '/^.*tunnel\.0\.\(proxyList\|option\.i2ptunnel\.httpclient\.SSLOutproxies\)/d' "/var/lib/i2p/i2p-config/i2ptunnel.config.d/*"
+sed -i '/^.*tunnel\.5\.\(proxyList\|option\.i2ptunnel\.httpclient\.SSLOutproxies\)/d' "/var/lib/i2p/i2p-config/i2ptunnel.config.d/*"
 
 # Add big subscription lists to Address Book
 # As of this commit, there are about 6400 entries
