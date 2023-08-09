@@ -1,0 +1,156 @@
+{
+  "import-2066832866": {
+    "active": true,
+    "address": "<gw ip here>",
+    "port": 4444,
+    "username": "",
+    "password": "",
+    "type": 1,
+    "title": "I2P",
+    "color": "#231ce8",
+    "index": 1,
+    "whitePatterns": [
+      {
+        "title": "eepsites",
+        "pattern": "\\.i2p(/.*)?",
+        "type": 2,
+        "protocols": 1,
+        "active": true
+      }
+    ],
+    "blackPatterns": [
+      {
+        "title": "local hostnames (usually no dots in the name). Pattern exists because 'Do not use this proxy for localhost and intranet/private IP addresses' is checked.",
+        "pattern": "^(?:[^:@/]+(?::[^@/]+)?@)?(?:localhost|127\\.\\d+\\.\\d+\\.\\d+)(?::\\d+)?(?:/.*)?$",
+        "type": 2,
+        "protocols": 1,
+        "active": true
+      },
+      {
+        "title": "local subnets (IANA reserved address space). Pattern exists because 'Do not use this proxy for localhost and intranet/private IP addresses' is checked.",
+        "pattern": "^(?:[^:@/]+(?::[^@/]+)?@)?(?:192\\.168\\.\\d+\\.\\d+|10\\.\\d+\\.\\d+\\.\\d+|172\\.(?:1[6789]|2[0-9]|3[01])\\.\\d+\\.\\d+)(?::\\d+)?(?:/.*)?$",
+        "type": 2,
+        "protocols": 1,
+        "active": true
+      },
+      {
+        "title": "localhost - matches the local host optionally prefixed by a user:password authentication string and optionally suffixed by a port number. The entire local subnet (127.0.0.0/8) matches. Pattern exists because 'Do not use this proxy for localhost and intranet/private IP addresses' is checked.",
+        "pattern": "^(?:[^:@/]+(?::[^@/]+)?@)?[\\w-]+(?::\\d+)?(?:/.*)?$",
+        "type": 2,
+        "protocols": 1,
+        "active": true
+      }
+    ],
+    "proxyDNS": false,
+    "pacURL": ""
+  },
+  "import-3700324133": {
+    "active": true,
+    "address": "127.0.0.1",
+    "port": 9050,
+    "username": "",
+    "password": "",
+    "type": 3,
+    "proxyDNS": true,
+    "title": "TOR",
+    "color": "#04e600",
+    "index": 2,
+    "whitePatterns": [
+      {
+        "title": "hidden services",
+        "pattern": "^(http(s)?|ftp|irc)\\://[\\w\\-\\.]+\\.onion(/.*)?",
+        "type": 2,
+        "protocols": 1,
+        "active": true
+      },
+      {
+        "title": "all sites",
+        "pattern": "*",
+        "type": 1,
+        "protocols": 1,
+        "active": true
+      }
+    ],
+    "blackPatterns": [
+      {
+        "title": "localhost - Matches the local host optionally prefixed by a user:password authentication string and optionally suffixed by a port number. Note that the entire local subnet (127.0.0.0/8) matches. Pattern exists because \"Do not use this proxy for internal IP addresses\" is checked",
+        "pattern": "^https?://(?:[^:@/]+(?::[^@/]+)?@)?(?:localhost|127\\.\\d+\\.\\d+\\.\\d+)(?::\\d+)?.*",
+        "type": 2,
+        "protocols": 1,
+        "active": true
+      },
+      {
+        "title": "local subnets (IANA reserved address space). Pattern exists because \"Do not use this proxy for internal IP addresses\" is checked",
+        "pattern": "^https?://(?:[^:@/]+(?::[^@/]+)?@)?(?:192\\.168\\.\\d+\\.\\d+|10\\.\\d+\\.\\d+\\.\\d+|172\\.(?:1[6789]|2[0-9]|3[01])\\.\\d+\\.\\d+)(?::\\d+)?.*",
+        "type": 2,
+        "protocols": 1,
+        "active": true
+      },
+      {
+        "title": "local hostnames (usually no dots in the name). Pattern exists because \"Do not use this proxy for internal IP addresses\" is checked",
+        "pattern": "^https?://(?:[^:@/]+(?::[^@/]+)?@)?[\\w-]+(?::\\d+)?/.*",
+        "type": 2,
+        "protocols": 1,
+        "active": true
+      }
+    ],
+    "pacURL": ""
+  },
+  "k20d21508277536715": {
+    "active": true,
+    "type": 3,
+    "title": "Default",
+    "color": "#e6001b",
+    "index": 9007199254740991,
+    "whitePatterns": [
+      {
+        "title": "localhost - Matches the local host optionally prefixed by a user:password authentication string and optionally suffixed by a port number. Note that the entire local subnet (127.0.0.0/8) matches. Pattern exists because \"Do not use this proxy for internal IP addresses\" is checked",
+        "active": true,
+        "pattern": "^https?://(?:[^:@/]+(?::[^@/]+)?@)?(?:localhost|127\\.\\d+\\.\\d+\\.\\d+)(?::\\d+)?/.*",
+        "importedPattern": "^https?://(?:[^:@/]+(?::[^@/]+)?@)?(?:localhost|127\\.\\d+\\.\\d+\\.\\d+)(?::\\d+)?/.*",
+        "type": 2,
+        "protocols": 1
+      },
+      {
+        "title": "local subnets (IANA reserved address space). Pattern exists because \"Do not use this proxy for internal IP addresses\" is checked",
+        "active": true,
+        "pattern": "^https?://(?:[^:@/]+(?::[^@/]+)?@)?(?:192\\.168\\.\\d+\\.\\d+|10\\.\\d+\\.\\d+\\.\\d+|172\\.(?:1[6789]|2[0-9]|3[01])\\.\\d+\\.\\d+)(?::\\d+)?/.*",
+        "importedPattern": "^https?://(?:[^:@/]+(?::[^@/]+)?@)?(?:192\\.168\\.\\d+\\.\\d+|10\\.\\d+\\.\\d+\\.\\d+|172\\.(?:1[6789]|2[0-9]|3[01])\\.\\d+\\.\\d+)(?::\\d+)?/.*",
+        "type": 2,
+        "protocols": 1
+      },
+      {
+        "title": "local hostnames (usually no dots in the name). Pattern exists because \"Do not use this proxy for internal IP addresses\" is checked",
+        "active": true,
+        "pattern": "^https?://(?:[^:@/]+(?::[^@/]+)?@)?[\\w-]+(?::\\d+)?/.*",
+        "importedPattern": "^https?://(?:[^:@/]+(?::[^@/]+)?@)?[\\w-]+(?::\\d+)?/.*",
+        "type": 2,
+        "protocols": 1
+      }
+    ],
+    "blackPatterns": [
+      {
+        "title": "All sites",
+        "active": true,
+        "pattern": "*",
+        "importedPattern": "*",
+        "type": 1,
+        "protocols": 1
+      }
+    ],
+    "address": "127.0.0.1",
+    "port": 9050,
+    "proxyDNS": true,
+    "username": "",
+    "password": "",
+    "pacURL": ""
+  },
+  "logging": {
+    "size": 100,
+    "active": false
+  },
+  "mode": "patterns",
+  "browserVersion": "102.14.0",
+  "foxyProxyVersion": "7.5.1",
+  "foxyProxyEdition": "standard"
+}

@@ -12,11 +12,11 @@ cd "$(dirname "$0")"
 main() {
 
 # Install i2pd Debian
-#wget -qO /tmp/i2pd.deb https://github.com/PurpleI2P/i2pd/releases/download/2.43.0/i2pd_2.43.0-1bullseye1_amd64.deb
-I2PD_URL=$(wget -qO - https://api.github.com/repos/purplei2p/i2pd/releases/latest | grep 'bookworm' | grep 'amd64' | grep 'browser_download_url' | cut -d'"' -f 4)
-wget -qO /tmp/i2pd.deb $I2PD_URL
-
-apt -y install /tmp/i2pd.deb
+#wget -qO /tmp/i2pd.deb https://github.com/PurpleI2P/i2pd/releases/download/2.48.0/i2pd_2.48.0-1bookworm1_arm64.deb
+#apt -y install /tmp/i2pd.deb
+###
+# Need to copy i2pd.deb from AppVM downloaded from above URL
+apt -y install /home/user/QubesIncoming/i2pd.deb
 systemctl stop i2pd
 
 apt-get update
@@ -31,6 +31,9 @@ cp tunnels.conf /etc/i2pd/
 # You can add new ports for tunnels in the tunnels.conf file
 echo "INTERNAL_OPEN_PORTS+=\" 4444 \"" >> /etc/whonix_firewall.d/30_whonix_gateway_default.conf
 echo "INTERNAL_OPEN_PORTS+=\" 4445 \"" >> /etc/whonix_firewall.d/30_whonix_gateway_default.conf
+echo "INTERNAL_OPEN_PORTS+=\" 4447 \"" >> /etc/whonix_firewall.d/30_whonix_gateway_default.conf
+echo "INTERNAL_OPEN_PORTS+=\" 5000 \"" >> /etc/whonix_firewall.d/30_whonix_gateway_default.conf
+echo "INTERNAL_OPEN_PORTS+=\" 6667 \"" >> /etc/whonix_firewall.d/30_whonix_gateway_default.conf
 echo "INTERNAL_OPEN_PORTS+=\" 6668 \"" >> /etc/whonix_firewall.d/30_whonix_gateway_default.conf
 echo "INTERNAL_OPEN_PORTS+=\" 6669 \"" >> /etc/whonix_firewall.d/30_whonix_gateway_default.conf
 echo "NO_NAT_USERS+=\" $(id -u i2pd)\"" >> /etc/whonix_firewall.d/30_whonix_gateway_default.conf
